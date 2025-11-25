@@ -1,5 +1,11 @@
 // Mock data for HealthDash
 
+export const profiles = [
+  { id: 1, name: "Sneha", age: 28, weight: 65, height: 165 },
+  { id: 2, name: "Rohit", age: 35, weight: 78, height: 178 },
+  { id: 3, name: "Meera", age: 24, weight: 58, height: 160 }
+];
+
 export const weeklyData = [
   { day: "Mon", steps: 8432, calories: 420, sleep: 7.2, hr: 72 },
   { day: "Tue", steps: 10231, calories: 510, sleep: 6.8, hr: 68 },

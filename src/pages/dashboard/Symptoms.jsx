@@ -1,17 +1,24 @@
 import React from "react";
 import { Typography } from "@material-tailwind/react";
 import SymptomChecker from "@/components/SymptomChecker";
+import ExportControls from "@/components/ExportControls";
+import { weeklyData } from "@/data/mock";
 
 export function Symptoms() {
   return (
-    <div className="mt-4 mb-8 px-4">
+    <div className="mt-4 mb-8 px-4 app-container">
       <div className="mb-12">
-        <Typography variant="h3" className="text-white mb-2">
-          Symptom Tracker
-        </Typography>
-        <Typography className="text-white/70">
-          Monitor and log your symptoms over time
-        </Typography>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+          <div>
+            <Typography variant="h3" className="text-white mb-2">
+              Symptom Tracker
+            </Typography>
+            <Typography className="text-white/70">
+              Monitor and log your symptoms over time
+            </Typography>
+          </div>
+          <ExportControls weeklyData={weeklyData} />
+        </div>
       </div>
 
       <div className="mb-8">

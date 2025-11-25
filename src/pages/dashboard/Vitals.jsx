@@ -1,7 +1,8 @@
 import React from "react";
-import { Typography } from "@material-tailwind/react";
+import { Typography, Button } from "@material-tailwind/react";
 import HeartRateLine from "@/components/HeartRateLine";
 import { weeklyData } from "@/data/mock";
+import ExportControls from "@/components/ExportControls";
 
 export function Vitals() {
   // Calculate averages
@@ -9,14 +10,19 @@ export function Vitals() {
   const avgSleep = (weeklyData.reduce((sum, day) => sum + day.sleep, 0) / weeklyData.length).toFixed(1);
 
   return (
-    <div className="mt-4 mb-8 px-4">
+    <div className="mt-4 mb-8 px-4 app-container">
       <div className="mb-12">
-        <Typography variant="h3" className="text-white mb-2">
-          Vitals Overview
-        </Typography>
-        <Typography className="text-white/70">
-          Detailed view of your vital health metrics
-        </Typography>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+          <div>
+            <Typography variant="h3" className="text-white mb-2">
+              Vitals Overview
+            </Typography>
+            <Typography className="text-white/70">
+              Detailed view of your vital health metrics
+            </Typography>
+          </div>
+          <ExportControls weeklyData={weeklyData} />
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">

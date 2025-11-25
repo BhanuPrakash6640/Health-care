@@ -8,22 +8,45 @@ import HeartRateLine from "@/components/HeartRateLine";
 import WaterSlider from "@/components/WaterSlider";
 import SymptomChecker from "@/components/SymptomChecker";
 import QuickInsights from "@/components/QuickInsights";
+import ExportControls from "@/components/ExportControls";
+import DrilldownModal from "@/components/DrilldownModal";
 
 export function Analytics() {
   // Calculate totals from weekly data
   const totalSteps = weeklyData.reduce((sum, day) => sum + day.steps, 0);
   const avgSleep = (weeklyData.reduce((sum, day) => sum + day.sleep, 0) / weeklyData.length).toFixed(1);
   const avgHR = Math.round(weeklyData.reduce((sum, day) => sum + day.hr, 0) / weeklyData.length);
+  
+  // State for drilldown modal
+  const [drilldownOpen, setDrilldownOpen] = React.useState(false);
+  const [selectedDayData, setSelectedDayData] = React.useState(null);
+  
+  // State for card expansion
+  const [expandedCard, setExpandedCard] = React.useState(null);
+  
+  const handleBarClick = (data) => {
+    setSelectedDayData(data);
+    setDrilldownOpen(true);
+  };
+  
+  const handleToggleExpand = (cardId) => {
+    setExpandedCard(expandedCard === cardId ? null : cardId);
+  };
 
   return (
-    <div className="mt-4 mb-8 px-4">
+    <div className="mt-4 mb-8 px-4 app-container">
       <div className="mb-12">
-        <Typography variant="h3" className="text-white mb-2">
-          Health Analytics
-        </Typography>
-        <Typography className="text-white/70">
-          Track your health metrics and wellness journey
-        </Typography>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+          <div>
+            <Typography variant="h3" className="text-white mb-2">
+              Health Analytics
+            </Typography>
+            <Typography className="text-white/70">
+              Track your health metrics and wellness journey
+            </Typography>
+          </div>
+          <ExportControls weeklyData={weeklyData} />
+        </div>
       </div>
 
       {/* Top Cards Row */}
@@ -33,12 +56,8 @@ export function Analytics() {
           title="Heart Rate"
           value={`${avgHR} bpm`}
           subtitle="Average this week"
-          expandedContent={
-            <div className="text-white/80 text-sm">
-              <p className="mb-2">Current: {weeklyData[weeklyData.length - 1].hr} bpm</p>
-              <p>Resting: ~60 bpm</p>
-            </div>
-          }
+          expanded={expandedCard === "heartRate"}
+          onToggleExpand={handleToggleExpand}
         />
         
         <TopCard 
@@ -46,12 +65,8 @@ export function Analytics() {
           title="Steps"
           value={totalSteps.toLocaleString()}
           subtitle="This week"
-          expandedContent={
-            <div className="text-white/80 text-sm">
-              <p className="mb-2">Today: {weeklyData[weeklyData.length - 1].steps.toLocaleString()}</p>
-              <p>Goal: 10,000 steps</p>
-            </div>
-          }
+          expanded={expandedCard === "steps"}
+          onToggleExpand={handleToggleExpand}
         />
         
         <TopCard 
@@ -59,12 +74,8 @@ export function Analytics() {
           title="Sleep"
           value={`${avgSleep} hrs`}
           subtitle="Average per night"
-          expandedContent={
-            <div className="text-white/80 text-sm">
-              <p className="mb-2">Last night: {weeklyData[weeklyData.length - 1].sleep} hrs</p>
-              <p>Goal: 8 hrs</p>
-            </div>
-          }
+          expanded={expandedCard === "sleep"}
+          onToggleExpand={handleToggleExpand}
         />
         
         <TopCard 
@@ -72,12 +83,8 @@ export function Analytics() {
           title="Calories"
           value={weeklyData.reduce((sum, day) => sum + day.calories, 0).toLocaleString()}
           subtitle="Burned this week"
-          expandedContent={
-            <div className="text-white/80 text-sm">
-              <p className="mb-2">Today: {weeklyData[weeklyData.length - 1].calories} cal</p>
-              <p>Daily goal: 2,000 cal</p>
-            </div>
-          }
+          expanded={expandedCard === "calories"}
+          onToggleExpand={handleToggleExpand}
         />
       </div>
 
@@ -87,7 +94,7 @@ export function Analytics() {
         <div className="lg:col-span-2 space-y-6">
           <HeartRateLine />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <StepsChart weeklyData={weeklyData} />
+            <StepsChart weeklyData={weeklyData} onBarClick={handleBarClick} />
             <SleepArea weeklyData={weeklyData} />
           </div>
         </div>
@@ -99,6 +106,12 @@ export function Analytics() {
           <QuickInsights />
         </div>
       </div>
+      
+      <DrilldownModal 
+        open={drilldownOpen} 
+        onClose={() => setDrilldownOpen(false)} 
+        dayData={selectedDayData} 
+      />
     </div>
   );
 }

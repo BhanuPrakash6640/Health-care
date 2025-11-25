@@ -3,9 +3,13 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "rec
 import { Card, Typography } from "@material-tailwind/react";
 import { initialHistory } from "@/data/mock";
 
-const HeartRateLine = () => {
-  const [history, setHistory] = React.useState(initialHistory);
+const HeartRateLine = ({ history: externalHistory, setHistory: setExternalHistory }) => {
+  const [internalHistory, setInternalHistory] = React.useState(initialHistory);
   const [loading, setLoading] = React.useState(true);
+  const intervalRef = React.useRef(null);
+  const isControlled = externalHistory !== undefined && setExternalHistory !== undefined;
+  const history = isControlled ? externalHistory : internalHistory;
+  const setHistory = isControlled ? setExternalHistory : setInternalHistory;
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
@@ -14,8 +18,10 @@ const HeartRateLine = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  React.useEffect(() => {
-    const interval = setInterval(() => {
+  const startSimulation = React.useCallback(() => {
+    if (intervalRef.current) return; // Already running
+    
+    intervalRef.current = setInterval(() => {
       setHistory(prev => {
         // Generate a new heart rate value (60-80 bpm with some variation)
         const lastValue = prev[prev.length - 1].hr;
@@ -31,9 +37,20 @@ const HeartRateLine = () => {
         return newData;
       });
     }, 1800); // Update every 1.8 seconds
+  }, [setHistory]);
 
-    return () => clearInterval(interval);
+  const stopSimulation = React.useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
   }, []);
+
+  // Start simulation by default
+  React.useEffect(() => {
+    startSimulation();
+    return () => stopSimulation();
+  }, [startSimulation, stopSimulation]);
 
   if (loading) {
     return (

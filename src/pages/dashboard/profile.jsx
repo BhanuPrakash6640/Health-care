@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Card,
   CardBody,
@@ -6,8 +7,59 @@ import {
   Switch,
   Button,
 } from "@material-tailwind/react";
+import { profiles } from "@/data/mock";
+import { loadState, saveState } from "@/utils/persistence";
 
 export function Profile() {
+  const [selectedProfile, setSelectedProfile] = React.useState(profiles[0]);
+  const [height, setHeight] = React.useState('');
+  const [weight, setWeight] = React.useState('');
+  const [bmi, setBmi] = React.useState(null);
+  
+  React.useEffect(() => {
+    // Load saved profile from localStorage
+    const savedProfile = loadState('selectedProfile');
+    if (savedProfile) {
+      const profile = profiles.find(p => p.id === savedProfile.id);
+      if (profile) {
+        setSelectedProfile(profile);
+      }
+    }
+    
+    // Load saved BMI data
+    const savedHeight = loadState('userHeight');
+    const savedWeight = loadState('userWeight');
+    if (savedHeight) setHeight(savedHeight);
+    if (savedWeight) setWeight(savedWeight);
+    
+    // Calculate BMI if we have both height and weight
+    if (savedHeight && savedWeight) {
+      const heightInMeters = parseFloat(savedHeight) / 100;
+      const bmiValue = parseFloat(savedWeight) / (heightInMeters * heightInMeters);
+      setBmi(bmiValue);
+    }
+  }, []);
+  
+  const handleCalculateBMI = () => {
+    if (height && weight) {
+      saveState('userHeight', height);
+      saveState('userWeight', weight);
+      
+      const heightInMeters = parseFloat(height) / 100;
+      const bmiValue = parseFloat(weight) / (heightInMeters * heightInMeters);
+      setBmi(bmiValue);
+    }
+  };
+  
+  const getBMICategory = (bmiValue) => {
+    if (bmiValue < 18.5) return { text: 'Underweight', color: 'bg-blue-500/20 text-blue-300' };
+    if (bmiValue < 25) return { text: 'Normal', color: 'bg-green-500/20 text-green-300' };
+    if (bmiValue < 30) return { text: 'Overweight', color: 'bg-yellow-500/20 text-yellow-300' };
+    return { text: 'Obese', color: 'bg-red-500/20 text-red-300' };
+  };
+  
+  const bmiCategory = bmi ? getBMICategory(bmi) : null;
+
   return (
     <div className="mt-4 mb-8 px-4">
       <div className="mb-12">
@@ -31,7 +83,7 @@ export function Profile() {
                 className="mx-auto mb-4 border-4 border-white/30"
               />
               <Typography variant="h5" className="text-white mb-1">
-                Alex Johnson
+                {selectedProfile.name}
               </Typography>
               <Typography className="text-white/70">
                 HealthDash User
@@ -44,7 +96,7 @@ export function Profile() {
                     Age
                   </Typography>
                   <Typography className="text-white">
-                    32 years
+                    {selectedProfile.age} years
                   </Typography>
                 </div>
                 <div>
@@ -52,7 +104,7 @@ export function Profile() {
                     Weight
                   </Typography>
                   <Typography className="text-white">
-                    72 kg
+                    {selectedProfile.weight} kg
                   </Typography>
                 </div>
                 <div>
@@ -60,7 +112,7 @@ export function Profile() {
                     Height
                   </Typography>
                   <Typography className="text-white">
-                    178 cm
+                    {selectedProfile.height} cm
                   </Typography>
                 </div>
                 <div>
@@ -68,7 +120,9 @@ export function Profile() {
                     BMI
                   </Typography>
                   <Typography className="text-white">
-                    22.7 (Normal)
+                    {selectedProfile.weight && selectedProfile.height ? (
+                      `${(selectedProfile.weight / Math.pow(selectedProfile.height/100, 2)).toFixed(1)} (Normal)`
+                    ) : 'Not calculated'}
                   </Typography>
                 </div>
               </div>
@@ -133,6 +187,8 @@ export function Profile() {
                   </Typography>
                   <input 
                     type="number" 
+                    value={height}
+                    onChange={(e) => setHeight(e.target.value)}
                     className="w-full bg-white/20 border border-white/30 rounded-lg px-3 py-2 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary"
                     placeholder="178"
                   />
@@ -143,36 +199,46 @@ export function Profile() {
                   </Typography>
                   <input 
                     type="number" 
+                    value={weight}
+                    onChange={(e) => setWeight(e.target.value)}
                     className="w-full bg-white/20 border border-white/30 rounded-lg px-3 py-2 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary"
                     placeholder="72"
                   />
                 </div>
                 <div className="flex items-end">
-                  <Button className="w-full bg-primary hover:bg-primary/80 text-white py-2 px-4 rounded-lg">
+                  <Button 
+                    onClick={handleCalculateBMI}
+                    className="w-full bg-primary hover:bg-primary/80 text-white py-2 px-4 rounded-lg"
+                  >
                     Calculate
                   </Button>
                 </div>
               </div>
               
-              <div className="bg-white/10 rounded-lg p-4">
-                <div className="flex justify-between items-center mb-2">
-                  <Typography className="text-white">
-                    Your BMI: <span className="font-bold">22.7</span>
-                  </Typography>
-                  <span className="px-2 py-1 bg-green-500/20 text-green-300 rounded-full text-xs">
-                    Normal
-                  </span>
+              {bmi && (
+                <div className="bg-white/10 rounded-lg p-4">
+                  <div className="flex justify-between items-center mb-2">
+                    <Typography className="text-white">
+                      Your BMI: <span className="font-bold">{bmi.toFixed(1)}</span>
+                    </Typography>
+                    <span className={`px-2 py-1 ${bmiCategory.color} rounded-full text-xs`}>
+                      {bmiCategory.text}
+                    </span>
+                  </div>
+                  <div className="h-2 bg-white/20 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-gradient-to-r from-blue-500 via-green-500 via-yellow-500 to-red-500" 
+                      style={{ width: `${Math.min(100, Math.max(0, (bmi - 10) / 30 * 100))}%` }}
+                    ></div>
+                  </div>
+                  <div className="flex justify-between text-xs text-white/60 mt-2">
+                    <span>Underweight</span>
+                    <span>Normal</span>
+                    <span>Overweight</span>
+                    <span>Obese</span>
+                  </div>
                 </div>
-                <div className="h-2 bg-white/20 rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-green-500 to-yellow-500 w-3/4"></div>
-                </div>
-                <div className="flex justify-between text-xs text-white/60 mt-2">
-                  <span>Underweight</span>
-                  <span>Normal</span>
-                  <span>Overweight</span>
-                  <span>Obese</span>
-                </div>
-              </div>
+              )}
             </CardBody>
           </Card>
 

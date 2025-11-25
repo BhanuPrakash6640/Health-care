@@ -2,7 +2,7 @@ import React from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { Card, Typography } from "@material-tailwind/react";
 
-const StepsChart = ({ weeklyData }) => {
+const StepsChart = ({ weeklyData, onBarClick }) => {
   // Add loading state simulation
   const [loading, setLoading] = React.useState(true);
 
@@ -57,6 +57,7 @@ const StepsChart = ({ weeklyData }) => {
               dataKey="steps" 
               fill="#7C3AED" 
               radius={[4, 4, 0, 0]}
+              onClick={onBarClick}
             />
           </BarChart>
         </ResponsiveContainer>
