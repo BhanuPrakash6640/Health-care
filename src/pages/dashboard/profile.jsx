@@ -6,11 +6,14 @@ import {
   Typography,
   Switch,
   Button,
+  Radio,
 } from "@material-tailwind/react";
 import { profiles } from "@/data/mock";
 import { loadState, saveState } from "@/utils/persistence";
+import { useTheme } from "@/context/themeContext";
 
 export function Profile() {
+  const { theme, changeTheme, accessibility, toggleHighContrast, toggleLargeText } = useTheme();
   const [selectedProfile, setSelectedProfile] = React.useState(profiles[0]);
   const [height, setHeight] = React.useState('');
   const [weight, setWeight] = React.useState('');
@@ -245,7 +248,100 @@ export function Profile() {
           <Card className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl">
             <CardBody className="p-6">
               <Typography variant="h6" className="text-white mb-6">
-                Preferences
+                Display Preferences
+              </Typography>
+              
+              <div className="space-y-6">
+                {/* Theme Presets */}
+                <div>
+                  <Typography className="text-white mb-3">
+                    Theme Presets
+                  </Typography>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div 
+                      className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
+                        theme === 'neon' 
+                          ? 'border-primary bg-primary/20' 
+                          : 'border-white/20 bg-white/10 hover:bg-white/20'
+                      }`}
+                      onClick={() => changeTheme('neon')}
+                    >
+                      <Typography className="text-white font-medium">Neon</Typography>
+                      <Typography className="text-white/70 text-sm">Vibrant & energetic</Typography>
+                    </div>
+                    <div 
+                      className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
+                        theme === 'calm' 
+                          ? 'border-primary bg-primary/20' 
+                          : 'border-white/20 bg-white/10 hover:bg-white/20'
+                      }`}
+                      onClick={() => changeTheme('calm')}
+                    >
+                      <Typography className="text-white font-medium">Calm</Typography>
+                      <Typography className="text-white/70 text-sm">Peaceful & soothing</Typography>
+                    </div>
+                    <div 
+                      className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
+                        theme === 'corporate' 
+                          ? 'border-primary bg-primary/20' 
+                          : 'border-white/20 bg-white/10 hover:bg-white/20'
+                      }`}
+                      onClick={() => changeTheme('corporate')}
+                    >
+                      <Typography className="text-white font-medium">Corporate</Typography>
+                      <Typography className="text-white/70 text-sm">Professional & clean</Typography>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Accessibility Options */}
+                <div className="pt-4 border-t border-white/10">
+                  <Typography className="text-white mb-3">
+                    Accessibility
+                  </Typography>
+                  
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center pb-3 border-b border-white/10">
+                      <div>
+                        <Typography className="text-white">
+                          High Contrast
+                        </Typography>
+                        <Typography className="text-white/60 text-sm">
+                          Enhanced visibility
+                        </Typography>
+                      </div>
+                      <Switch 
+                        checked={accessibility.highContrast} 
+                        onChange={toggleHighContrast}
+                        color="blue" 
+                      />
+                    </div>
+                    
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <Typography className="text-white">
+                          Large Text
+                        </Typography>
+                        <Typography className="text-white/60 text-sm">
+                          Increased font size
+                        </Typography>
+                      </div>
+                      <Switch 
+                        checked={accessibility.largeText} 
+                        onChange={toggleLargeText}
+                        color="blue" 
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardBody>
+          </Card>
+
+          <Card className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl">
+            <CardBody className="p-6">
+              <Typography variant="h6" className="text-white mb-6">
+                Account Preferences
               </Typography>
               
               <div className="space-y-4">
