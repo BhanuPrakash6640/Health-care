@@ -1,16 +1,27 @@
 import React from "react";
 import { Card, Typography, Button } from "@material-tailwind/react";
 import { motion } from "framer-motion";
+import { loadState, saveState } from "@/utils/persistence";
 
 const WaterSlider = () => {
   const [waterIntake, setWaterIntake] = React.useState(2.5); // Starting with 2.5L
 
+  // Load saved water intake from localStorage
+  React.useEffect(() => {
+    const savedWaterIntake = loadState('waterIntake', 2.5);
+    setWaterIntake(savedWaterIntake);
+  }, []);
+
   const incrementWater = () => {
-    setWaterIntake(prev => Math.min(8, prev + 0.25));
+    const newIntake = Math.min(8, waterIntake + 0.25);
+    setWaterIntake(newIntake);
+    saveState('waterIntake', newIntake);
   };
 
   const decrementWater = () => {
-    setWaterIntake(prev => Math.max(0, prev - 0.25));
+    const newIntake = Math.max(0, waterIntake - 0.25);
+    setWaterIntake(newIntake);
+    saveState('waterIntake', newIntake);
   };
 
   // Calculate percentage for the progress bar

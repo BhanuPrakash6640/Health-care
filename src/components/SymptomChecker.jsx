@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Typography, Button } from "@material-tailwind/react";
 import { motion } from "framer-motion";
 import { symptomMap } from "@/data/mock";
+import { loadState, saveState } from "@/utils/persistence";
 
 const SymptomChecker = () => {
   const [selectedSymptoms, setSelectedSymptoms] = React.useState([]);
@@ -16,14 +17,19 @@ const SymptomChecker = () => {
     { id: "dizziness", name: "Dizziness" },
   ];
 
+  // Load saved symptoms from localStorage
+  React.useEffect(() => {
+    const savedSymptoms = loadState('selectedSymptoms', []);
+    setSelectedSymptoms(savedSymptoms);
+  }, []);
+
   const toggleSymptom = (symptomId) => {
-    setSelectedSymptoms(prev => {
-      if (prev.includes(symptomId)) {
-        return prev.filter(id => id !== symptomId);
-      } else {
-        return [...prev, symptomId];
-      }
-    });
+    const newSelectedSymptoms = selectedSymptoms.includes(symptomId)
+      ? selectedSymptoms.filter(id => id !== symptomId)
+      : [...selectedSymptoms, symptomId];
+    
+    setSelectedSymptoms(newSelectedSymptoms);
+    saveState('selectedSymptoms', newSelectedSymptoms);
   };
 
   React.useEffect(() => {
