@@ -1,0 +1,99 @@
+/* Animation classes for HealthDash */
+
+/* Pulse animation for heart SVG */
+.pulse-heart {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Theme transition */
+.theme-transition {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Accessibility focus styles */
+.accessibility-focus {
+  outline: 2px solid #7C3AED !important;
+  outline-offset: 2px;
+}
+
+/* Large text classes */
+.large-text {
+  font-size: 1.2rem !important;
+}
+
+.large-text h1 {
+  font-size: 2.5rem !important;
+}
+
+.large-text h2 {
+  font-size: 2rem !important;
+}
+
+.large-text h3 {
+  font-size: 1.75rem !important;
+}
+
+.large-text h4 {
+  font-size: 1.5rem !important;
+}
+
+.large-text h5 {
+  font-size: 1.25rem !important;
+}
+
+.large-text h6 {
+  font-size: 1.1rem !important;
+}
+
+/* High contrast mode */
+.high-contrast {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+}
+
+.high-contrast .bg-white\/10,
+.high-contrast .bg-white\/20 {
+  background-color: #000000 !important;
+  border-color: #FFFFFF !important;
+}
+
+.high-contrast .text-white,
+.high-contrast .text-white\/70,
+.high-contrast .text-white\/80,
+.high-contrast .text-white\/60 {
+  color: #FFFFFF !important;
+}
+
+/* Theme preset classes */
+.theme-neon {
+  --primary: #EC4899; /* pink-500 */
+  --secondary: #0EA5E9; /* sky-500 */
+  --accent: #8B5CF6; /* violet-500 */
+}
+
+.theme-calm {
+  --primary: #10B981; /* emerald-500 */
+  --secondary: #3B82F6; /* blue-500 */
+  --accent: #8B5CF6; /* violet-500 */
+}
+
+.theme-corporate {
+  --primary: #6366F1; /* indigo-500 */
+  --secondary: #14B8A6; /* teal-500 */
+  --accent: #8B5CF6; /* violet-500 */
+}
