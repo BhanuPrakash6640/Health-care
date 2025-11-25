@@ -46,6 +46,28 @@ export function Home() {
         </motion.div>
       </div>
 
+      {/* Animated SVG Hero */}
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+        className="flex justify-center mb-12"
+      >
+        <div className="relative w-48 h-48">
+          <svg 
+            viewBox="0 0 100 100" 
+            className="w-full h-full pulse-heart"
+          >
+            <path 
+              d="M50,30 C60,10 80,20 80,40 C80,60 60,70 50,85 C40,70 20,60 20,40 C20,20 40,10 50,30 Z" 
+              fill="#EC4899"
+              className="drop-shadow-lg"
+            />
+          </svg>
+          <div className="absolute inset-0 bg-pink-500 rounded-full filter blur-xl opacity-30 animate-pulse"></div>
+        </div>
+      </motion.div>
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
