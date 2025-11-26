@@ -49,6 +49,9 @@ export default function Appointments() {
       targetId: newAppointment.id,
       source: "Appointments Page"
     });
+    
+    // Show confirmation
+    alert(`Appointment booked successfully for ${new Date(appointmentData.date).toLocaleString()}!`);
   };
 
   const handleCancelAppointment = (appointmentId) => {
