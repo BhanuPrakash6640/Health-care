@@ -1,0 +1,9 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional quick global tweaks */
+html, body, #root {
+  height: 100%;
+}

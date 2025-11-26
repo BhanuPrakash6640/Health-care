@@ -31,7 +31,7 @@ const ProfileSwitcher = ({ currentProfile, onProfileChange }) => {
       <Menu>
         <MenuHandler>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button className="bg-white/20 hover:bg-white/30 text-white rounded-lg py-2 px-4 flex items-center gap-2">
+            <Button className="bg-gray-700/50 hover:bg-gray-600/50 text-white rounded-lg py-2 px-4 flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
                 <span className="font-medium">{selectedProfile.name.charAt(0)}</span>
               </div>
@@ -42,12 +42,12 @@ const ProfileSwitcher = ({ currentProfile, onProfileChange }) => {
             </Button>
           </motion.div>
         </MenuHandler>
-        <MenuList className="bg-white/10 backdrop-blur-sm border border-white/20">
+        <MenuList className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50">
           {profiles.map((profile) => (
             <MenuItem 
               key={profile.id}
               onClick={() => handleProfileSelect(profile)}
-              className="flex items-center gap-2 text-white hover:bg-white/20"
+              className="flex items-center gap-2 text-white hover:bg-gray-700/50"
             >
               <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
                 <span className="font-medium">{profile.name.charAt(0)}</span>

@@ -30,7 +30,7 @@ const DrilldownModal = ({ open, onClose, dayData, hourlyData }) => {
     <Dialog 
       open={open} 
       handler={onClose}
-      className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl"
+      className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl"
       size="xl"
     >
       <motion.div
@@ -38,7 +38,7 @@ const DrilldownModal = ({ open, onClose, dayData, hourlyData }) => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.3 }}
       >
-        <DialogHeader className="text-white border-b border-white/20">
+        <DialogHeader className="text-white border-b border-gray-700/50">
           <Typography variant="h4">
             {dayData ? `${dayData.day} Details` : "Day Details"}
           </Typography>
@@ -49,29 +49,29 @@ const DrilldownModal = ({ open, onClose, dayData, hourlyData }) => {
             <div className="space-y-6">
               {/* Key metrics */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <Card className="bg-white/10 border border-white/20 rounded-lg p-4">
+                <Card className="bg-gray-700/50 border border-gray-600/50 rounded-lg p-4">
                   <Typography className="text-white/70 text-sm">Steps</Typography>
                   <Typography variant="h4" className="text-white">{dayData.steps?.toLocaleString()}</Typography>
                 </Card>
                 
-                <Card className="bg-white/10 border border-white/20 rounded-lg p-4">
+                <Card className="bg-gray-700/50 border border-gray-600/50 rounded-lg p-4">
                   <Typography className="text-white/70 text-sm">Calories</Typography>
                   <Typography variant="h4" className="text-white">{dayData.calories}</Typography>
                 </Card>
                 
-                <Card className="bg-white/10 border border-white/20 rounded-lg p-4">
+                <Card className="bg-gray-700/50 border border-gray-600/50 rounded-lg p-4">
                   <Typography className="text-white/70 text-sm">Sleep</Typography>
                   <Typography variant="h4" className="text-white">{dayData.sleep} hrs</Typography>
                 </Card>
                 
-                <Card className="bg-white/10 border border-white/20 rounded-lg p-4">
+                <Card className="bg-gray-700/50 border border-gray-600/50 rounded-lg p-4">
                   <Typography className="text-white/70 text-sm">Heart Rate</Typography>
                   <Typography variant="h4" className="text-white">{dayData.hr} bpm</Typography>
                 </Card>
               </div>
               
               {/* Hourly heart rate chart */}
-              <Card className="bg-white/10 border border-white/20 rounded-xl p-6">
+              <Card className="bg-gray-700/50 border border-gray-600/50 rounded-xl p-6">
                 <Typography variant="h6" className="text-white mb-4">
                   Hourly Heart Rate
                 </Typography>
@@ -91,8 +91,8 @@ const DrilldownModal = ({ open, onClose, dayData, hourlyData }) => {
                       />
                       <Tooltip
                         contentStyle={{
-                          backgroundColor: "rgba(255, 255, 255, 0.1)",
-                          borderColor: "rgba(255, 255, 255, 0.2)",
+                          backgroundColor: "rgba(30, 41, 59, 0.8)",
+                          borderColor: "rgba(55, 65, 81, 0.5)",
                           borderRadius: "0.5rem",
                           backdropFilter: "blur(10px)",
                         }}
@@ -113,7 +113,7 @@ const DrilldownModal = ({ open, onClose, dayData, hourlyData }) => {
               </Card>
               
               {/* Hourly steps chart */}
-              <Card className="bg-white/10 border border-white/20 rounded-xl p-6">
+              <Card className="bg-gray-700/50 border border-gray-600/50 rounded-xl p-6">
                 <Typography variant="h6" className="text-white mb-4">
                   Hourly Steps
                 </Typography>
@@ -132,8 +132,8 @@ const DrilldownModal = ({ open, onClose, dayData, hourlyData }) => {
                       />
                       <Tooltip
                         contentStyle={{
-                          backgroundColor: "rgba(255, 255, 255, 0.1)",
-                          borderColor: "rgba(255, 255, 255, 0.2)",
+                          backgroundColor: "rgba(30, 41, 59, 0.8)",
+                          borderColor: "rgba(55, 65, 81, 0.5)",
                           borderRadius: "0.5rem",
                           backdropFilter: "blur(10px)",
                         }}

@@ -13,32 +13,32 @@ export function SignIn() {
     <section className="m-8 flex gap-4">
       <div className="w-full lg:w-3/5 mt-24">
         <div className="text-center">
-          <Typography variant="h2" className="font-bold mb-4">Sign In</Typography>
-          <Typography variant="paragraph" color="blue-gray" className="text-lg font-normal">Enter your email and password to Sign In.</Typography>
+          <Typography variant="h2" className="font-bold mb-4 text-white">Sign In</Typography>
+          <Typography variant="paragraph" className="text-lg font-normal text-white/80">Enter your email and password to Sign In.</Typography>
         </div>
         <form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
           <div className="mb-1 flex flex-col gap-6">
-            <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
+            <Typography variant="small" className="text-white/80 -mb-3 font-medium">
               Your email
             </Typography>
             <Input
               size="lg"
               placeholder="name@mail.com"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+              className="!border-t-blue-gray-200 focus:!border-t-gray-900 bg-gray-700/50 text-white placeholder-white/50"
               labelProps={{
-                className: "before:content-none after:content-none",
+                className: "before:content-none after:content-none text-white",
               }}
             />
-            <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
+            <Typography variant="small" className="text-white/80 -mb-3 font-medium">
               Password
             </Typography>
             <Input
               type="password"
               size="lg"
               placeholder="********"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+              className="!border-t-blue-gray-200 focus:!border-t-gray-900 bg-gray-700/50 text-white placeholder-white/50"
               labelProps={{
-                className: "before:content-none after:content-none",
+                className: "before:content-none after:content-none text-white",
               }}
             />
           </div>
@@ -46,13 +46,12 @@ export function SignIn() {
             label={
               <Typography
                 variant="small"
-                color="gray"
-                className="flex items-center justify-start font-medium"
+                className="flex items-center justify-start font-medium text-white/80"
               >
                 I agree the&nbsp;
                 <a
                   href="#"
-                  className="font-normal text-black transition-colors hover:text-gray-900 underline"
+                  className="font-normal text-white transition-colors hover:text-gray-300 underline"
                 >
                   Terms and Conditions
                 </a>
@@ -60,7 +59,7 @@ export function SignIn() {
             }
             containerProps={{ className: "-ml-2.5" }}
           />
-          <Button className="mt-6" fullWidth>
+          <Button className="mt-6 bg-primary hover:bg-primary/80" fullWidth>
             Sign In
           </Button>
 
@@ -69,22 +68,21 @@ export function SignIn() {
               label={
                 <Typography
                   variant="small"
-                  color="gray"
-                  className="flex items-center justify-start font-medium"
+                  className="flex items-center justify-start font-medium text-white/80"
                 >
                   Subscribe me to newsletter
                 </Typography>
               }
               containerProps={{ className: "-ml-2.5" }}
             />
-            <Typography variant="small" className="font-medium text-gray-900">
+            <Typography variant="small" className="font-medium text-white">
               <a href="#">
                 Forgot Password
               </a>
             </Typography>
           </div>
           <div className="space-y-4 mt-8">
-            <Button size="lg" color="white" className="flex items-center gap-2 justify-center shadow-md" fullWidth>
+            <Button size="lg" className="flex items-center gap-2 justify-center shadow-md bg-white hover:bg-gray-200 text-gray-900" fullWidth>
               <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_1156_824)">
                   <path d="M16.3442 8.18429C16.3442 7.64047 16.3001 7.09371 16.206 6.55872H8.66016V9.63937H12.9813C12.802 10.6329 12.2258 11.5119 11.3822 12.0704V14.0693H13.9602C15.4741 12.6759 16.3442 10.6182 16.3442 8.18429Z" fill="#4285F4" />
@@ -100,14 +98,14 @@ export function SignIn() {
               </svg>
               <span>Sign in With Google</span>
             </Button>
-            <Button size="lg" color="white" className="flex items-center gap-2 justify-center shadow-md" fullWidth>
+            <Button size="lg" className="flex items-center gap-2 justify-center shadow-md bg-white hover:bg-gray-200 text-gray-900" fullWidth>
               <img src="/img/twitter-logo.svg" height={24} width={24} alt="" />
               <span>Sign in With Twitter</span>
             </Button>
           </div>
-          <Typography variant="paragraph" className="text-center text-blue-gray-500 font-medium mt-4">
+          <Typography variant="paragraph" className="text-center text-white/80 font-medium mt-4">
             Not registered?
-            <Link to="/auth/sign-up" className="text-gray-900 ml-1">Create account</Link>
+            <Link to="/auth/sign-up" className="text-white ml-1 hover:text-gray-300">Create account</Link>
           </Typography>
         </form>
 

@@ -1,8 +1,8 @@
 # HealthDash - Interactive Health Analytics Dashboard
 
-![version](https://img.shields.io/badge/version-2.1.0-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/material-tailwind-dashboard-react.svg)](https://github.com/creativetimofficial/material-tailwind-dashboard-react/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/material-tailwind-dashboard-react.svg)](https://github.com/creativetimofficial/material-tailwind-dashboard-react/issues?q=is%3Aissue+is%3Aclosed)
+![version](https://img.shields.io/badge/version-2.1.0-blue.svg)
 
-![HealthDash Dashboard](https://s3.amazonaws.com/creativetim_bucket/products/488/original/material-tailwind-dashboard-react.jpg)
+![HealthDash Dashboard](/img/healthdash-dashboard.jpg)
 
 HealthDash is an interactive frontend health analytics dashboard that visualizes daily & weekly vitals (heart rate, steps, sleep, calories) with live charts, an interactive water tracker, and a symptom checker. Built purely in the frontend using React, Tailwind, Recharts and Framer Motion.
 
@@ -24,6 +24,15 @@ HealthDash is an interactive frontend health analytics dashboard that visualizes
 - **Responsive Design**: Mobile-friendly layout that works on all devices
 - **Dark Mode**: Beautiful dark-themed UI with glassmorphism effects
 - **Animations**: Smooth transitions and micro-interactions with Framer Motion
+- **Unified Patient Records**: Consolidated view of patient health information from multiple sources
+- **FHIR Export/Import**: Export patient records as FHIR-like JSON bundles and import external data
+- **Appointment Scheduling**: Calendar view with appointment booking and wait time estimates
+- **Resource Allocation Dashboard**: Visualize bed utilization, staff availability, and equipment status
+- **Consent & Privacy Controls**: Per-record consent toggles and global data sharing preferences
+- **Audit Logging**: Track all user activities and system access for compliance
+- **Role-Based Access**: Switch between patient, clinician, and administrator views
+- **PHI Redaction**: Export options that remove protected health information
+- **Advanced Search**: Full-text search across all patient records with highlighting
 
 ## Table of Contents
 
@@ -47,17 +56,28 @@ HealthDash is an interactive frontend health analytics dashboard that visualizes
 
 HealthDash — Interactive frontend health analytics dashboard. Visualizes daily & weekly vitals (heart rate, steps, sleep, calories) with live charts, an interactive water tracker, and a symptom checker. Built purely in the frontend using React, Tailwind, Recharts and Framer Motion. Demo focus: UX polish, responsive design, and interactive micro-features.
 
-2-minute demo flow: 
-1) Open site and show top cards + dark mode. 
-2) Expand Heart Rate card to show live updates. 
-3) Drag water slider & toggle symptoms. 
-4) Show weekly charts and Quick Insights. 
+### 2-Minute Core Demo Flow:
+1) Open site and show top cards + dark mode.
+2) Expand Heart Rate card to show live updates.
+3) Drag water slider & toggle symptoms.
+4) Show weekly charts and Quick Insights.
 5) Export report as PDF/PNG/CSV.
 6) Click on Steps chart to show drilldown modal.
 7) Press 'P' to enter presentation mode.
 8) Switch between user profiles.
 9) Change theme presets and accessibility settings.
 10) Close with 1-line future roadmap (connect wearables & backend).
+
+### 3-Minute Extended Demo Flow (New Features):
+1) Navigate to Unified Records page to show consolidated patient data.
+2) Demonstrate FHIR export/import functionality with sample JSON.
+3) Book a new appointment and show wait time estimates.
+4) View Resource Allocation dashboard with heatmaps.
+5) Toggle consent preferences for data sharing.
+6) View Audit Log to see tracked activities.
+7) Switch roles to show different UI capabilities.
+8) Use advanced search to find specific records.
+9) Export records with PHI redaction enabled.
 
 ## Export Instructions
 
@@ -161,6 +181,12 @@ healthdash
 ## Browser Support
 
 HealthDash supports all modern browsers including Chrome, Firefox, Safari, and Edge.
+
+## Safety Disclaimer
+
+⚠️ **Hackathon Demo Only - Not for Medical Use**
+
+This application is a frontend demonstration created for educational and hackathon purposes only. It is not a medical device, diagnostic tool, or substitute for professional healthcare. All data is mock data for UI/UX evaluation. No real patient data is stored, transmitted, or processed. Features like FHIR export/import, appointment scheduling, and resource allocation are simulated for demonstration purposes. Always consult qualified healthcare professionals for medical advice and treatment decisions.
 
 ## Licensing
 

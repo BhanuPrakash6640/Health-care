@@ -39,7 +39,7 @@ export function Home() {
             </Button>
           </Link>
           <Link to="/dashboard/vitals">
-            <Button className="bg-white/20 hover:bg-white/30 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 backdrop-blur-sm border border-white/30">
+            <Button className="bg-gray-700/50 hover:bg-gray-600/50 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 backdrop-blur-sm border border-gray-600/50">
               Track Vitals
             </Button>
           </Link>
@@ -73,7 +73,7 @@ export function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 text-center"
+          className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 text-center"
         >
           <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" viewBox="0 0 20 20" fill="currentColor">
@@ -92,7 +92,7 @@ export function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.8 }}
-          className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 text-center"
+          className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 text-center"
         >
           <div className="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-secondary" viewBox="0 0 20 20" fill="currentColor">
@@ -111,7 +111,7 @@ export function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.0 }}
-          className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 text-center"
+          className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 text-center"
         >
           <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-accent" viewBox="0 0 20 20" fill="currentColor">
@@ -131,7 +131,7 @@ export function Home() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 1.2 }}
-        className="bg-gradient-to-r from-primary/20 to-secondary/20 rounded-2xl p-8 border border-white/20 backdrop-blur-sm"
+        className="bg-gradient-to-r from-primary/20 to-secondary/20 rounded-2xl p-8 border border-gray-700/50 backdrop-blur-sm"
       >
         <div className="max-w-3xl mx-auto text-center">
           <Typography variant="h3" className="text-white mb-4">

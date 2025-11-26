@@ -76,14 +76,15 @@ export function Profile() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-1">
-          <Card className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl overflow-hidden">
+          {/* Profile Card */}
+          <Card className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl overflow-hidden">
             <div className="bg-gradient-to-r from-primary/20 to-secondary/20 p-6 text-center">
               <Avatar
                 src="/img/bruce-mars.jpeg"
                 alt="user-avatar"
                 size="xl"
                 variant="circular"
-                className="mx-auto mb-4 border-4 border-white/30"
+                className="mx-auto mb-4 border-4 border-gray-600/50"
               />
               <Typography variant="h5" className="text-white mb-1">
                 {selectedProfile.name}
@@ -134,118 +135,122 @@ export function Profile() {
         </div>
 
         <div className="lg:col-span-2 space-y-6">
-          <Card className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl">
-            <CardBody className="p-6">
-              <Typography variant="h6" className="text-white mb-6">
-                Health Information
-              </Typography>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <Typography className="text-white/60 text-sm mb-1">
-                    Blood Type
-                  </Typography>
-                  <Typography className="text-white">
-                    O Positive
-                  </Typography>
-                </div>
-                <div>
-                  <Typography className="text-white/60 text-sm mb-1">
-                    Allergies
-                  </Typography>
-                  <Typography className="text-white">
-                    Penicillin, Pollen
-                  </Typography>
-                </div>
-                <div>
-                  <Typography className="text-white/60 text-sm mb-1">
-                    Medical Conditions
-                  </Typography>
-                  <Typography className="text-white">
-                    None
-                  </Typography>
-                </div>
-                <div>
-                  <Typography className="text-white/60 text-sm mb-1">
-                    Medications
-                  </Typography>
-                  <Typography className="text-white">
-                    None
-                  </Typography>
-                </div>
-              </div>
-            </CardBody>
-          </Card>
-
-          <Card className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl">
-            <CardBody className="p-6">
-              <Typography variant="h6" className="text-white mb-6">
-                BMI Calculator
-              </Typography>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div>
-                  <Typography className="text-white/60 text-sm mb-1">
-                    Height (cm)
-                  </Typography>
-                  <input 
-                    type="number" 
-                    value={height}
-                    onChange={(e) => setHeight(e.target.value)}
-                    className="w-full bg-white/20 border border-white/30 rounded-lg px-3 py-2 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="178"
-                  />
-                </div>
-                <div>
-                  <Typography className="text-white/60 text-sm mb-1">
-                    Weight (kg)
-                  </Typography>
-                  <input 
-                    type="number" 
-                    value={weight}
-                    onChange={(e) => setWeight(e.target.value)}
-                    className="w-full bg-white/20 border border-white/30 rounded-lg px-3 py-2 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="72"
-                  />
-                </div>
-                <div className="flex items-end">
-                  <Button 
-                    onClick={handleCalculateBMI}
-                    className="w-full bg-primary hover:bg-primary/80 text-white py-2 px-4 rounded-lg"
-                  >
-                    Calculate
-                  </Button>
-                </div>
-              </div>
-              
-              {bmi && (
-                <div className="bg-white/10 rounded-lg p-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <Typography className="text-white">
-                      Your BMI: <span className="font-bold">{bmi.toFixed(1)}</span>
+          {/* Health Goals */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <Card className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl">
+              <CardBody className="p-6">
+                <Typography variant="h6" className="text-white mb-6">
+                  Health Information
+                </Typography>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <Typography className="text-white/60 text-sm mb-1">
+                      Blood Type
                     </Typography>
-                    <span className={`px-2 py-1 ${bmiCategory.color} rounded-full text-xs`}>
-                      {bmiCategory.text}
-                    </span>
+                    <Typography className="text-white">
+                      O Positive
+                    </Typography>
                   </div>
-                  <div className="h-2 bg-white/20 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-gradient-to-r from-blue-500 via-green-500 via-yellow-500 to-red-500" 
-                      style={{ width: `${Math.min(100, Math.max(0, (bmi - 10) / 30 * 100))}%` }}
-                    ></div>
+                  <div>
+                    <Typography className="text-white/60 text-sm mb-1">
+                      Allergies
+                    </Typography>
+                    <Typography className="text-white">
+                      Penicillin, Pollen
+                    </Typography>
                   </div>
-                  <div className="flex justify-between text-xs text-white/60 mt-2">
-                    <span>Underweight</span>
-                    <span>Normal</span>
-                    <span>Overweight</span>
-                    <span>Obese</span>
+                  <div>
+                    <Typography className="text-white/60 text-sm mb-1">
+                      Medical Conditions
+                    </Typography>
+                    <Typography className="text-white">
+                      None
+                    </Typography>
+                  </div>
+                  <div>
+                    <Typography className="text-white/60 text-sm mb-1">
+                      Medications
+                    </Typography>
+                    <Typography className="text-white">
+                      None
+                    </Typography>
                   </div>
                 </div>
-              )}
-            </CardBody>
-          </Card>
+              </CardBody>
+            </Card>
 
-          <Card className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl">
+            <Card className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl">
+              <CardBody className="p-6">
+                <Typography variant="h6" className="text-white mb-6">
+                  BMI Calculator
+                </Typography>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                  <div>
+                    <Typography className="text-white/60 text-sm mb-1">
+                      Height (cm)
+                    </Typography>
+                    <input 
+                      type="number" 
+                      value={height}
+                      onChange={(e) => setHeight(e.target.value)}
+                      className="w-full bg-gray-700/50 border border-gray-600/50 rounded-lg px-3 py-2 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary"
+                      placeholder="178"
+                    />
+                  </div>
+                  <div>
+                    <Typography className="text-white/60 text-sm mb-1">
+                      Weight (kg)
+                    </Typography>
+                    <input 
+                      type="number" 
+                      value={weight}
+                      onChange={(e) => setWeight(e.target.value)}
+                      className="w-full bg-gray-700/50 border border-gray-600/50 rounded-lg px-3 py-2 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary"
+                      placeholder="72"
+                    />
+                  </div>
+                  <div className="flex items-end">
+                    <Button 
+                      onClick={handleCalculateBMI}
+                      className="w-full bg-primary hover:bg-primary/80 text-white py-2 px-4 rounded-lg"
+                    >
+                      Calculate
+                    </Button>
+                  </div>
+                </div>
+                
+                {bmi && (
+                  <div className="bg-gray-700/50 rounded-lg p-4">
+                    <div className="flex justify-between items-center mb-2">
+                      <Typography className="text-white">
+                        Your BMI: <span className="font-bold">{bmi.toFixed(1)}</span>
+                      </Typography>
+                      <span className={`px-2 py-1 ${bmiCategory.color} rounded-full text-xs`}>
+                        {bmiCategory.text}
+                      </span>
+                    </div>
+                    <div className="h-2 bg-gray-600/50 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-gradient-to-r from-blue-500 via-green-500 via-yellow-500 to-red-500" 
+                        style={{ width: `${Math.min(100, Math.max(0, (bmi - 10) / 30 * 100))}%` }}
+                      ></div>
+                    </div>
+                    <div className="flex justify-between text-xs text-white/60 mt-2">
+                      <span>Underweight</span>
+                      <span>Normal</span>
+                      <span>Overweight</span>
+                      <span>Obese</span>
+                    </div>
+                  </div>
+                )}
+              </CardBody>
+            </Card>
+          </div>
+
+          {/* Account Settings */}
+          <Card className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl mt-6">
             <CardBody className="p-6">
               <Typography variant="h6" className="text-white mb-6">
                 Display Preferences
@@ -262,7 +267,7 @@ export function Profile() {
                       className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                         theme === 'neon' 
                           ? 'border-primary bg-primary/20' 
-                          : 'border-white/20 bg-white/10 hover:bg-white/20'
+                          : 'border-gray-700/50 bg-gray-700/50 hover:bg-gray-600/50'
                       }`}
                       onClick={() => changeTheme('neon')}
                     >
@@ -273,7 +278,7 @@ export function Profile() {
                       className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                         theme === 'calm' 
                           ? 'border-primary bg-primary/20' 
-                          : 'border-white/20 bg-white/10 hover:bg-white/20'
+                          : 'border-gray-700/50 bg-gray-700/50 hover:bg-gray-600/50'
                       }`}
                       onClick={() => changeTheme('calm')}
                     >
@@ -284,7 +289,7 @@ export function Profile() {
                       className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                         theme === 'corporate' 
                           ? 'border-primary bg-primary/20' 
-                          : 'border-white/20 bg-white/10 hover:bg-white/20'
+                          : 'border-gray-700/50 bg-gray-700/50 hover:bg-gray-600/50'
                       }`}
                       onClick={() => changeTheme('corporate')}
                     >
@@ -295,13 +300,13 @@ export function Profile() {
                 </div>
                 
                 {/* Accessibility Options */}
-                <div className="pt-4 border-t border-white/10">
+                <div className="pt-4 border-t border-gray-700/50">
                   <Typography className="text-white mb-3">
                     Accessibility
                   </Typography>
                   
                   <div className="space-y-4">
-                    <div className="flex justify-between items-center pb-3 border-b border-white/10">
+                    <div className="flex justify-between items-center pb-3 border-b border-gray-700/50">
                       <div>
                         <Typography className="text-white">
                           High Contrast
@@ -338,14 +343,14 @@ export function Profile() {
             </CardBody>
           </Card>
 
-          <Card className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl">
+          <Card className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl">
             <CardBody className="p-6">
               <Typography variant="h6" className="text-white mb-6">
                 Account Preferences
               </Typography>
               
               <div className="space-y-4">
-                <div className="flex justify-between items-center pb-3 border-b border-white/10">
+                <div className="flex justify-between items-center pb-3 border-b border-gray-700/50">
                   <div>
                     <Typography className="text-white">
                       Dark Mode
@@ -357,7 +362,7 @@ export function Profile() {
                   <Switch defaultChecked color="blue" />
                 </div>
                 
-                <div className="flex justify-between items-center pb-3 border-b border-white/10">
+                <div className="flex justify-between items-center pb-3 border-b border-gray-700/50">
                   <div>
                     <Typography className="text-white">
                       Notifications
@@ -369,7 +374,7 @@ export function Profile() {
                   <Switch defaultChecked color="blue" />
                 </div>
                 
-                <div className="flex justify-between items-center pb-3 border-b border-white/10">
+                <div className="flex justify-between items-center pb-3 border-b border-gray-700/50">
                   <div>
                     <Typography className="text-white">
                       Weekly Reports

@@ -19,7 +19,7 @@ const TopCard = ({ id, title, value, subtitle, expanded, onToggleExpand }) => {
       className="cursor-pointer"
     >
       <Card
-        className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4"
+        className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-4"
         onClick={() => onToggleExpand && onToggleExpand(id)}
       >
         <div className="flex justify-between items-start">
@@ -40,7 +40,7 @@ const TopCard = ({ id, title, value, subtitle, expanded, onToggleExpand }) => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="mt-4 pt-4 border-t border-white/20"
+            className="mt-4 pt-4 border-t border-gray-700/50"
           >
             <div className="text-white/80 text-sm">
               <p className="mb-2">Detailed view for {title}</p>

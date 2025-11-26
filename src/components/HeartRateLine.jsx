@@ -2,8 +2,15 @@ import React from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { Card, Typography } from "@material-tailwind/react";
 import { initialHistory } from "@/data/mock";
+import { computeAnomaly } from "@/utils/anomaly";
+import { runModelStub } from "@/utils/modelStub";
 
-const HeartRateLine = ({ history: externalHistory, setHistory: setExternalHistory }) => {
+const HeartRateLine = ({ 
+  history: externalHistory, 
+  setHistory: setExternalHistory,
+  onAnomalyDetected,
+  wearableOn
+}) => {
   const [internalHistory, setInternalHistory] = React.useState(initialHistory);
   const [loading, setLoading] = React.useState(true);
   const intervalRef = React.useRef(null);
@@ -34,10 +41,29 @@ const HeartRateLine = ({ history: externalHistory, setHistory: setExternalHistor
         
         // Add new point and remove oldest if we have more than 24 points
         const newData = [...prev.slice(1), { time: timeString, hr: newValue }];
+        
+        // Run anomaly detection if wearable is on
+        if (wearableOn && onAnomalyDetected) {
+          const { score, z } = computeAnomaly(prev, newValue);
+          
+          // Combine with AI model stub for enhanced detection
+          runModelStub(prev).then(modelScore => {
+            const finalScore = (modelScore + score) / 2;
+            if (finalScore > 0.7) {
+              onAnomalyDetected({ score: finalScore, z }, newValue);
+            }
+          }).catch(error => {
+            // Fallback to just the statistical method if model fails
+            if (score > 0.7) {
+              onAnomalyDetected({ score, z }, newValue);
+            }
+          });
+        }
+        
         return newData;
       });
     }, 1800); // Update every 1.8 seconds
-  }, [setHistory]);
+  }, [setHistory, wearableOn, onAnomalyDetected]);
 
   const stopSimulation = React.useCallback(() => {
     if (intervalRef.current) {
@@ -46,27 +72,32 @@ const HeartRateLine = ({ history: externalHistory, setHistory: setExternalHistor
     }
   }, []);
 
-  // Start simulation by default
+  // Handle wearable state changes
   React.useEffect(() => {
-    startSimulation();
+    if (wearableOn) {
+      startSimulation();
+    } else {
+      stopSimulation();
+    }
+    
     return () => stopSimulation();
-  }, [startSimulation, stopSimulation]);
+  }, [wearableOn, startSimulation, stopSimulation]);
 
   if (loading) {
     return (
-      <Card className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
+      <Card className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6">
         <Typography variant="h6" className="text-white mb-4">
           Heart Rate
         </Typography>
         <div className="h-64 flex items-center justify-center">
-          <div className="animate-pulse bg-white/20 rounded-lg h-48 w-full" />
+          <div className="animate-pulse bg-gray-700/50 rounded-lg h-48 w-full" />
         </div>
       </Card>
     );
   }
 
   return (
-    <Card className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
+    <Card className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6">
       <Typography variant="h6" className="text-white mb-4">
         Heart Rate
       </Typography>
@@ -86,8 +117,8 @@ const HeartRateLine = ({ history: externalHistory, setHistory: setExternalHistor
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "rgba(255, 255, 255, 0.1)",
-                borderColor: "rgba(255, 255, 255, 0.2)",
+                backgroundColor: "rgba(30, 41, 59, 0.8)",
+                borderColor: "rgba(55, 65, 81, 0.5)",
                 borderRadius: "0.5rem",
                 backdropFilter: "blur(10px)",
               }}

@@ -42,7 +42,7 @@ const SymptomChecker = () => {
   }, [selectedSymptoms]);
 
   return (
-    <Card className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
+    <Card className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6">
       <Typography variant="h6" className="text-white mb-4">
         Symptom Checker
       </Typography>
@@ -59,7 +59,7 @@ const SymptomChecker = () => {
               className={`rounded-lg w-full py-3 px-2 min-w-0 ${
                 selectedSymptoms.includes(symptom.id)
                   ? "bg-accent hover:bg-accent/80 text-white"
-                  : "bg-white/20 hover:bg-white/30 text-white"
+                  : "bg-gray-700/50 hover:bg-gray-600/50 text-white"
               }`}
             >
               <Typography className="text-sm font-medium normal-case">
@@ -71,7 +71,7 @@ const SymptomChecker = () => {
       </div>
       
       {suggestions.length > 0 && (
-        <div className="border-t border-white/20 pt-4">
+        <div className="border-t border-gray-700/50 pt-4">
           <Typography variant="h6" className="text-white mb-3">
             Suggestions
           </Typography>
@@ -82,7 +82,7 @@ const SymptomChecker = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white/10 rounded-lg p-3"
+                className="bg-gray-700/50 rounded-lg p-3"
               >
                 <Typography className="text-white font-medium text-sm">
                   {item.symptom}

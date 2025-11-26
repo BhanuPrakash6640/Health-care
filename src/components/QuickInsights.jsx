@@ -4,13 +4,13 @@ import { quickInsights } from "@/data/mock";
 
 const QuickInsights = () => {
   return (
-    <Card className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
+    <Card className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6">
       <Typography variant="h6" className="text-white mb-4">
         Quick Insights
       </Typography>
       
       <div className="space-y-4">
-        <div className="flex justify-between items-center pb-3 border-b border-white/10">
+        <div className="flex justify-between items-center pb-3 border-b border-gray-700/50">
           <Typography className="text-white/80">
             Best Day
           </Typography>
@@ -19,7 +19,7 @@ const QuickInsights = () => {
           </Typography>
         </div>
         
-        <div className="flex justify-between items-center pb-3 border-b border-white/10">
+        <div className="flex justify-between items-center pb-3 border-b border-gray-700/50">
           <Typography className="text-white/80">
             Avg. Sleep
           </Typography>

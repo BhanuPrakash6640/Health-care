@@ -57,7 +57,7 @@ export function Configurator() {
 
   React.useEffect(() => {
     const stars = fetch(
-      "https://api.github.com/repos/creativetimofficial/material-tailwind-dashboard-react"
+      "https://api.github.com/repos/healinghorizons/healthdash"
     )
       .then((response) => response.json())
       .then((data) => setStars(formatNumber(data.stargazers_count, 1)));
@@ -65,16 +65,16 @@ export function Configurator() {
 
   return (
     <aside
-      className={`fixed top-0 right-0 z-50 h-screen w-96 bg-white px-2.5 shadow-lg transition-transform duration-300 ${
+      className={`fixed top-0 right-0 z-50 h-screen w-96 bg-gray-800 px-2.5 shadow-lg transition-transform duration-300 ${
         openConfigurator ? "translate-x-0" : "translate-x-96"
       }`}
     >
       <div className="flex items-start justify-between px-6 pt-8 pb-6">
         <div>
-          <Typography variant="h5" color="blue-gray">
+          <Typography variant="h5" color="white">
             Dashboard Configurator
           </Typography>
-          <Typography className="font-normal text-blue-gray-600">
+          <Typography className="font-normal text-white/80">
             See our dashboard options.
           </Typography>
         </div>
@@ -148,7 +148,7 @@ export function Configurator() {
           <hr />
           <div className="my-8 flex flex-col gap-4">
             <a
-              href="https://www.creative-tim.com/product/material-tailwind-dashboard-react?rel=mtdr"
+              href="https://www.healinghorizons.com/products?rel=hhdr"
               target="_black"
             >
               <Button variant="gradient" fullWidth>
@@ -174,7 +174,7 @@ export function Configurator() {
           </div>
           <a
             className="mx-auto flex items-center justify-center gap-2"
-            href="https://github.com/creativetimofficial/material-tailwind-dashboard-react"
+            href="https://github.com/healinghorizons/healthdash"
             target="_blank"
             rel="noreferrer"
           >

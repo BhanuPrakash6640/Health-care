@@ -163,7 +163,7 @@ export function Tables() {
                               alt={name}
                               size="xs"
                               variant="circular"
-                              className={`cursor-pointer border-2 border-white ${
+                              className={`cursor-pointer border-2 border-gray-700 ${
                                 key === 0 ? "" : "-ml-2.5"
                               }`}
                             />

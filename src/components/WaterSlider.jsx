@@ -28,7 +28,7 @@ const WaterSlider = () => {
   const percentage = (waterIntake / 8) * 100;
 
   return (
-    <Card className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
+    <Card className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6">
       <Typography variant="h6" className="text-white mb-4">
         Water Intake
       </Typography>
@@ -42,7 +42,7 @@ const WaterSlider = () => {
             {Math.round(percentage)}%
           </Typography>
         </div>
-        <div className="h-3 bg-white/20 rounded-full overflow-hidden">
+        <div className="h-3 bg-gray-700/50 rounded-full overflow-hidden">
           <motion.div 
             className="h-full bg-secondary rounded-full"
             initial={{ width: 0 }}

@@ -23,7 +23,7 @@ const PresentationToggle = ({ presentationMode, onToggle }) => {
         className={`flex items-center gap-2 rounded-lg py-2 px-4 ${
           presentationMode 
             ? 'bg-green-500 hover:bg-green-600 text-white' 
-            : 'bg-white/20 hover:bg-white/30 text-white'
+            : 'bg-gray-700/50 hover:bg-gray-600/50 text-white'
         }`}
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

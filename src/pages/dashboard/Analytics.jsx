@@ -10,6 +10,8 @@ import SymptomChecker from "@/components/SymptomChecker";
 import QuickInsights from "@/components/QuickInsights";
 import ExportControls from "@/components/ExportControls";
 import DrilldownModal from "@/components/DrilldownModal";
+import AnomalyModal from "@/components/AnomalyModal";
+import { runModelStub } from "@/utils/modelStub";
 
 export function Analytics() {
   // Calculate totals from weekly data
@@ -24,6 +26,20 @@ export function Analytics() {
   // State for card expansion
   const [expandedCard, setExpandedCard] = React.useState(null);
   
+  // State for anomaly detection
+  const [anomaly, setAnomaly] = React.useState({ score: 0, z: 0 });
+  const [showAlert, setShowAlert] = React.useState(false);
+  const [liveHR, setLiveHR] = React.useState(avgHR);
+  const [wearableOn, setWearableOn] = React.useState(true);
+  
+  // State for heart rate history
+  const [heartRateHistory, setHeartRateHistory] = React.useState(
+    weeklyData.map((day, index) => ({
+      time: `${Math.floor(index * 24 / weeklyData.length).toString().padStart(2, '0')}:00`,
+      hr: day.hr
+    }))
+  );
+
   const handleBarClick = (data) => {
     setSelectedDayData(data);
     setDrilldownOpen(true);
@@ -31,6 +47,12 @@ export function Analytics() {
   
   const handleToggleExpand = (cardId) => {
     setExpandedCard(expandedCard === cardId ? null : cardId);
+  };
+  
+  const handleAnomalyDetected = (anomalyData, latestHR) => {
+    setAnomaly(anomalyData);
+    setLiveHR(latestHR);
+    setShowAlert(true);
   };
 
   return (
@@ -45,7 +67,15 @@ export function Analytics() {
               Track your health metrics and wellness journey
             </Typography>
           </div>
-          <ExportControls weeklyData={weeklyData} />
+          <div className="flex gap-2">
+            <button 
+              onClick={() => setWearableOn(w => !w)}
+              className="px-3 py-2 rounded-lg bg-indigo-600 text-white"
+            >
+              {wearableOn ? "Disconnect Wearable" : "Connect Wearable (Demo)"}
+            </button>
+            <ExportControls weeklyData={weeklyData} />
+          </div>
         </div>
       </div>
 
@@ -92,7 +122,12 @@ export function Analytics() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Charts */}
         <div className="lg:col-span-2 space-y-6">
-          <HeartRateLine />
+          <HeartRateLine 
+            history={heartRateHistory}
+            setHistory={setHeartRateHistory}
+            onAnomalyDetected={handleAnomalyDetected}
+            wearableOn={wearableOn}
+          />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <StepsChart weeklyData={weeklyData} onBarClick={handleBarClick} />
             <SleepArea weeklyData={weeklyData} />
@@ -111,6 +146,13 @@ export function Analytics() {
         open={drilldownOpen} 
         onClose={() => setDrilldownOpen(false)} 
         dayData={selectedDayData} 
+      />
+      
+      <AnomalyModal
+        open={showAlert}
+        anomaly={anomaly}
+        latest={liveHR}
+        onClose={() => setShowAlert(false)}
       />
     </div>
   );
