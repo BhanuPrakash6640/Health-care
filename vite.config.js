@@ -10,6 +10,9 @@ export default defineConfig({
       devOptions: {
         enabled: true
       },
+      workbox: {
+        maximumFileSizeToCacheInBytes: 5000000, // 5MB limit
+      },
       manifest: {
         name: 'HealthDash - Health Analytics Dashboard',
         short_name: 'HealthDash',
@@ -25,4 +28,7 @@ export default defineConfig({
   resolve: {
     alias: [{ find: "@", replacement: "/src" }],
   },
+  build: {
+    chunkSizeWarningLimit: 1000
+  }
 });
