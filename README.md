@@ -50,7 +50,7 @@ HealthDash is an interactive frontend health analytics dashboard that visualizes
 1. Clone the repository
 2. Install dependencies: `npm install`
 3. Start the development server: `npm run dev`
-4. Open your browser to http://localhost:5173
+4. Open your browser to http://localhost:5179/dashboard/home
 
 ## Demo Script
 
