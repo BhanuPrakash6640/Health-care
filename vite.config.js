@@ -1,17 +1,19 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import { VitePWA } from "vite-plugin-pwa";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  build: {
+    chunkSizeWarningLimit: 4096,
+    sourcemap: false,
+  },
   plugins: [
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      devOptions: {
-        enabled: true
-      },
       workbox: {
-        maximumFileSizeToCacheInBytes: 6 * 1024 * 1024, // allow up to 6MB
+        maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
+        globIgnores: ['**/assets/index-*.js', '**/assets/*.js.map']
       },
       manifest: {
         name: 'HealthDash - Health Analytics Dashboard',
@@ -27,8 +29,5 @@ export default defineConfig({
   ],
   resolve: {
     alias: [{ find: "@", replacement: "/src" }],
-  },
-  build: {
-    chunkSizeWarningLimit: 1000
   }
-});
+})
